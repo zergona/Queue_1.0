@@ -26,7 +26,7 @@
 
 <script>
 import firebase from 'firebase'
-import { db } from 'C:/Users/WiMAX/tt0.3.2 - Copy/src/main'
+import { db } from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/main'
 import VueFire from 'vuefire'
 import 'firebase/firestore'
 

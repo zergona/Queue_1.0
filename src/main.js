@@ -22,6 +22,7 @@ firebase.initializeApp({
 let app
 
 export const db = firebase.firestore()
+export const YOUTUBE_API_KEY = 'AIzaSyCk6MdBIeUejC-ae89DkMrC7kZHWkFBzPM'
 
 Vue.config.productionTip = false
 

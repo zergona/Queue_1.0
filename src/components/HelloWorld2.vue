@@ -1,5 +1,4 @@
 <template>
-
   <div id="app"> 
     <div id="header" ALIGN=LEFT>
       <header>
@@ -9,26 +8,22 @@
       <div>
         <p></p>
       </div>
-    <form v-on:submit.prevent="search(link)">      
-      <input type="text" v-model="link" placeholder="Link pjesme">
+    <form v-for="(pjesme, idx) in Songs" :key="idx" v-on:submit.prevent="ytvid(pjesme.pjesma)">      
       <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
     </form>
+    
     <div>
-      
-    <!--  <div class="panel-body">-->
         <h1>Pjesme</h1>
-        <youtube :video-id="videoId"></youtube>
-        
+        <youtube id="xd" @ended=ended :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
     </div>
+    <article v-for="(pjesme, aaa) in Songs" :key="aaa">
+        <h3>{{ pjesme.pjesma }}</h3>
+    </article> 
 </div>
 </template>
 
 
 <script src="vue-youtube-embed.umd.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="auth.js"></script>
-<script src="search.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
 
 <script>
 import { auth } from "firebase";
@@ -38,13 +33,12 @@ Vue.use(VueYouTubeEmbed)
 
 <script>
 import firebase from 'firebase'
-import { db } from 'C:/Users/WiMAX/tt0.3.2 - Copy/src/main'
+import { db } from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/main'
 import VueFire from 'vuefire'
 import 'firebase/firestore'
 import Vue from 'vue'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
-import gapi from 'C:/Users/WiMAX/tt0.3.2 - Copy/src/components/auth.js'
 
 export default {
   name: 'HelloWorld2',
@@ -54,31 +48,58 @@ export default {
       pjesma: '',
       link: '',
       videoId: 'videoId',
-      startTime: ''
+      startTime: '',
+      indx: '',
+      videoEnded: false,
     }
   },
+  
   firestore () {
     return {
       Songs: db.collection('Songs').orderBy('createdAt')
     }
-  }, 
+  },
   methods: {
     logout: function () {
       firebase.auth().signOut().then(() => {
         this.$router.replace('login')
       })
     },
+    elements: function(Songs){
+    indx = 1
+    },
+    broj: function (Songs) {
+    return Songs.length
+    },
     addSong (pjesma) {
         const createdAt = new Date()
         db.collection('Songs').add({ pjesma, createdAt })
     },
-    ytvid (ime2) {
-      var ime3 = search(ime2)
-      this.videoId = ime3
+    ytvid (url) {
+      this.videoId = this.$youtube.getIdFromURL(url)
+      this.startTime = this.$youtube.getTimeFromURL(url)
+    },
+    log (message) {
+      this.$log(`${new Date().toLocaleTimeString()} -- ${message}`)
+    },
+    ended (event) { this.log('ended') 
+    change()
+    },
+    pause () {
+      this.player.pauseVideo()
+    },
+    change () {
+      this.videoId = dQw4w9WgXcQ
+    },
+    playing (event) {
+      // The player is playing a video.
     }
+
+
   }
 }
 </script>
+
 
 <style>
 #app {
