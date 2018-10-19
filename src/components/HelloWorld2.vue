@@ -11,14 +11,15 @@
     <form v-for="(pjesme, idx) in Songs" :key="idx" v-on:submit.prevent="ytvid(pjesme.pjesma)">      
       <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
     </form>
-    
+    <p>{{this.Songs[this.indx +1].pjesma}}</p>
     <div>
         <h1>Pjesme</h1>
-        <youtube id="xd" @ended=ended :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
+        <youtube id="xd" @ended="change" :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
     </div>
-    <article v-for="(pjesme, aaa) in Songs" :key="aaa">
-        <h3>{{ pjesme.pjesma }}</h3>
-    </article> 
+    <form v-on:submit.prevent="change()">
+      <input type="submit" class="btn btn-primary" value="XDDDD"><br> 
+    <button v-on:submit.prevent="change()">XDDDD</button>
+    </form>
 </div>
 </template>
 
@@ -27,8 +28,6 @@
 
 <script>
 import { auth } from "firebase";
-
-Vue.use(VueYouTubeEmbed)
 </script>
 
 <script>
@@ -66,7 +65,7 @@ export default {
       })
     },
     elements: function(Songs){
-    indx = 1
+    
     },
     broj: function (Songs) {
     return Songs.length
@@ -75,21 +74,21 @@ export default {
         const createdAt = new Date()
         db.collection('Songs').add({ pjesma, createdAt })
     },
+    
+    log: function (message) {
+      this.$log(`${new Date().toLocaleTimeString()} -- ${message}`)
+    },
+    ended () {       
+      this.log('ended')
+    },
+
+    change () {
+      this.videoId = this.ytvid(this.Songs[this.indx +1].pjesma)
+    },
+
     ytvid (url) {
       this.videoId = this.$youtube.getIdFromURL(url)
       this.startTime = this.$youtube.getTimeFromURL(url)
-    },
-    log (message) {
-      this.$log(`${new Date().toLocaleTimeString()} -- ${message}`)
-    },
-    ended (event) { this.log('ended') 
-    change()
-    },
-    pause () {
-      this.player.pauseVideo()
-    },
-    change () {
-      this.videoId = dQw4w9WgXcQ
     },
     playing (event) {
       // The player is playing a video.
