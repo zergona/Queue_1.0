@@ -8,18 +8,16 @@
       <div>
         <p></p>
       </div>
-    <form v-for="(pjesme, idx) in Songs" :key="idx" v-on:submit.prevent="ytvid(pjesme.pjesma)">      
-      <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
+    <form v-on:submit.prevent="change()">      
+      <input type="submit" class="btn btn-primary" value="Pokreni muziku"><br> 
     </form>
-    <p>{{this.Songs[this.indx +1].pjesma}}</p>
     <div>
         <h1>Pjesme</h1>
         <youtube id="xd" @ended="change" :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
     </div>
-    <form v-on:submit.prevent="change()">
-      <input type="submit" class="btn btn-primary" value="XDDDD"><br> 
-    <button v-on:submit.prevent="change()">XDDDD</button>
-    </form>
+    <div>
+      
+    </div>
 </div>
 </template>
 
@@ -40,16 +38,16 @@ import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 
 export default {
-  name: 'HelloWorld2',
+  name: 'Admin',
   data () {
     return {
       Songs: [],
       pjesma: '',
       link: '',
       videoId: 'videoId',
-      startTime: '',
-      indx: '',
-      videoEnded: false,
+      startTime:'',
+      indx: -1,
+      videoEnded: false, 
     }
   },
   
@@ -80,10 +78,21 @@ export default {
     },
     ended () {       
       this.log('ended')
+
     },
 
     change () {
-      this.videoId = this.ytvid(this.Songs[this.indx +1].pjesma)
+
+      if(this.indx <= this.Songs.length-1) {
+        this.indx = this.indx + 1
+      }
+        this.ytvid(this.Songs[this.indx].pjesma)
+        
+      
+    /*  else{
+        this.indx = this.indx - this.Songs.length + 1 
+        this.this.ytvid(this.Songs[this.indx + 1].pjesma)
+      }*/
     },
 
     ytvid (url) {

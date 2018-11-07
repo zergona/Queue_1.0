@@ -24,7 +24,7 @@ import firebase from 'firebase'
             signUp: function(){                
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
                     (user) => {
-                        this.$router.replace('HelloWorld')
+                        this.$router.replace('home')
                     },
                     (err) => {
                         alert('Oops. ' + err.message)

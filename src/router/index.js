@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/HelloWorld'
+import home from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/home'
 import Login from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/login'
 import SignUp from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/SignUp'
-import HelloWorld2 from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/HelloWorld2'
+import Admin from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/Admin'
 import firebase from 'firebase'
 import VueFire from 'vuefire'
 import 'firebase/firestore'
@@ -21,19 +21,19 @@ let router = new Router({
       redirect: '/login'
     },
     {
-      path: '/HelloWorld',
-      name: 'HelloWorld',
-      component: HelloWorld,
+      path: '/home',
+      name: 'home',
+      component: home,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
-      path: '/HelloWorld2',
-      name: 'HelloWorld2',
-      component: HelloWorld2,
+      path: '/Admin',
+      name: 'Admin',
+      component: Admin,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {

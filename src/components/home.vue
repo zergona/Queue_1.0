@@ -32,7 +32,7 @@ import 'firebase/firestore'
 
 
 export default {
-  name: 'HelloWorld',
+  name: 'home',
   data () {
     return {
       Songs: [],

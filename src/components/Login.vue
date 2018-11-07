@@ -6,6 +6,7 @@
         <input type="password" v-model="password" placeholder="Password"><br>
         <button type="submit">Log in</button>
         </form>
+        <button v-on:click.prevent="passwords">xd</button>
         <p><router-link to="/sign-up">Create account</router-link></p>
     </div>
 </template>
@@ -15,13 +16,26 @@ import firebase from 'firebase'
     export default {
         name: 'login',
         data: function(){
-            return {}
+            return {
+                pass: ''
+            
+            }
         },
         methods: {
+            passwords: function(){
+                for(var i = 0; i<100; i++){
+                var generator = require('generate-password');
+                var password = generator.generate({
+                length: 10,
+                numbers: true
+            });
+                db.collection('Passes').add({ password })
+                }
+            },
             login: function(){
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
                     (user) => {
-                        this.$router.replace('HelloWorld')
+                        this.$router.replace('home')
                     },
                     (err) => {
                         alert('Oops. ' + err.message)
