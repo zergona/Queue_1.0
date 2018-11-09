@@ -9,16 +9,34 @@
       <div>
         <p></p>
       </div>
-    <form v-on:submit.prevent="addSong(pjesma)">      
+    <form v-on:submit.prevent="addSong(pjesma, ime)">      
       <input type="text" v-model="pjesma" placeholder="Pjesma">
+      <input type="text" v-model="ime" placeholder="Ime">
       <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
     </form>
     <div>
-    <!--  <div class="panel-body">-->
         <h1>Pjesme</h1>
-        <article v-for="(pjesme, idx) in Songs" :key="idx">
-        <h3>{{ pjesme.pjesma }}</h3>
-        </article>
+         <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                  Ime
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(pjesme, idx) in Songs" :key="idx">
+            <td>
+              {{pjesme.ime}}
+            </td>
+            <td>
+              <input type="submit" class="btn btn-primary" value="Dodaj Muzicku" v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime)"><br> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 </div>
 
@@ -36,12 +54,13 @@ export default {
   data () {
     return {
       Songs: [],
-      pjesma: ''
+      pjesma: '',
+      ime: ''
     }
   },
   firestore () {
     return {
-      Songs: db.collection('Songs').orderBy('createdAt')
+      Songs: db.collection('Songs2').orderBy('createdAt')
     }
   }, 
   methods: {
@@ -50,9 +69,14 @@ export default {
         this.$router.replace('login')
       })
     },
-        addSong (pjesma) {
+        addSong (pjesma, ime) {
         const createdAt = new Date()
-        db.collection('Songs').add({ pjesma, createdAt })
+        db.collection('Songs2').add({ pjesma, createdAt, ime })
+    },
+    addSong2 (pjesma, id, ime) {
+        const createdAt = new Date()
+        db.collection('Songs').add({ pjesma, createdAt, ime })
+        db.collection('Songs2').doc(id).delete()
     }
   }
 }
@@ -67,6 +91,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+  background-image: "hmtropical";
 }
 #header {
   background-color:#A1C3D1

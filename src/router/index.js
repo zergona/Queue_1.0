@@ -5,7 +5,6 @@ import Login from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/login'
 import SignUp from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/SignUp'
 import Admin from 'C:/Users/Armin/hosmuzicku/hosmuzicku/src/components/Admin'
 import firebase from 'firebase'
-import VueFire from 'vuefire'
 import 'firebase/firestore'
 
 Vue.use(Router)
@@ -50,8 +49,8 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser;
-  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  let currentUser = firebase.auth().currentUser
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !currentUser) next('login')
   else next()

@@ -13,7 +13,7 @@
     </form>
     <div>
         <h1>Pjesme</h1>
-        <youtube id="xd" @ended="change" :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
+        <youtube id="xd" @ended="change(), del" :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
     </div>
     <div>
       
@@ -48,6 +48,7 @@ export default {
       startTime:'',
       indx: -1,
       videoEnded: false, 
+      ime: ''
     }
   },
   
@@ -87,12 +88,13 @@ export default {
         this.indx = this.indx + 1
       }
         this.ytvid(this.Songs[this.indx].pjesma)
-        
+        const createdAt = new Date()
+        var pjesma = this.Songs[this.indx-1].pjesma
+        var ime = this.Songs[this.indx-1].ime
+        var id = this.Songs[this.indx-1].id
+        db.collection('Songs2').add({ pjesma, createdAt, ime })
+        db.collection('Songs').doc(id).delete()
       
-    /*  else{
-        this.indx = this.indx - this.Songs.length + 1 
-        this.this.ytvid(this.Songs[this.indx + 1].pjesma)
-      }*/
     },
 
     ytvid (url) {
@@ -100,7 +102,7 @@ export default {
       this.startTime = this.$youtube.getTimeFromURL(url)
     },
     playing (event) {
-      // The player is playing a video.
+
     }
 
 
