@@ -12,43 +12,40 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-    export default {
-        name: 'login',
-        data: function(){
-            return {
-                pass: ''
-            
-            }
-        },
-        methods: {
-            passwords: function(){
-                for(var i = 0; i<100; i++){
-                var generator = require('generate-password');
-                var password = generator.generate({
-                length: 10,
-                numbers: true
-            });
-                db.collection('Passes').add({ password })
-                }
-            },
-            login: function(){
-                firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                    (user) => {
-                        this.$router.replace('home')
-                    },
-                    (err) => {
-                        alert('Oops. ' + err.message)
-                    },
-                    
-                );
-
-            }
-        }
-
+import firebase from "firebase";
+export default {
+  name: "login",
+  data: function() {
+    return {
+      pass: ""
+    };
+  },
+  methods: {
+    passwords: function() {
+      for (var i = 0; i < 100; i++) {
+        var generator = require("generate-password");
+        var password = generator.generate({
+          length: 10,
+          numbers: true
+        });
+        db.collection("Passes").add({ password });
+      }
+    },
+    login: function() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            this.$router.replace("home");
+          },
+          err => {
+            alert("Oops. " + err.message);
+          }
+        );
     }
-
-
+  }
+};
 </script>
 
 <style scoped>
