@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from 'C:/Users/WiMAX/hosmuzicku2/hosmuzicku/src/components/home'
-import Login from 'C:/Users/WiMAX/hosmuzicku2/hosmuzicku/src/components/login'
-import SignUp from 'C:/Users/WiMAX/hosmuzicku2/hosmuzicku/src/components/SignUp'
-import Admin from 'C:/Users/WiMAX/hosmuzicku2/hosmuzicku/src/components/Admin'
+import home from '../components/home'
+import Login from '../components/login'
+import SignUp from '../components/SignUp'
+import Admin from '../components/Admin'
 import firebase from 'firebase'
 import 'firebase/firestore'
 
