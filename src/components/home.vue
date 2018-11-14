@@ -51,7 +51,7 @@
 
 <script>
 import firebase from "firebase";
-import { db } from "C:/Users/WiMAX/hosmuzicku2/hosmuzicku/src/main";
+import { db } from "../main";
 import VueFire from "vuefire";
 import "firebase/firestore";
 
