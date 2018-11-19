@@ -23,7 +23,7 @@
   <div id="wrapper">
 
     <nav>
-		  <img id="menuicon" onclick="promijeni()" src="./imgs/menuicon.png">		
+		  <img id="menuicon" v-on:click="toggleBtn()" src="./imgs/menuicon.png">		
 	  </nav>
 
     <div id="dodaj-pjesmu">
@@ -66,35 +66,54 @@
                   </tbody>
                 </table>
               </div>
+
+					<div id="yt_prozor">
+						<h3>Izabrali ste pjesmu:</h3>
+						<iframe width="320" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+
+					<div style="border-bottom: solid 2px #4c8fff;"></div>
+
+					<h1 id="acc-natpis">Your account</h1>
+
+					<div id="karte">
+							<img src="./imgs/user2.jpg" alt="Card image"> 
+							<h4>Ime i prezime</h4>
+							<p>Some example text.</p>
+							<a href="#"><button id="login">Log in</button></a>
+							<a href="#"><button id="reg">Registruj se</button></a>
+					</div>
+
             </div>
+
+
+											<div id="pop-up-ask">
+						<div></div>
+						<img v-on:click="zatvoribug()" class ="close-icon" src="./imgs/closeicon.png" alt="close-icon">
+							<div id="bg-modal" >
+										<div>
+											<textarea rows="10" cols="30" id="contact-form-msg" name="Msg" placeholder="Molimo Vas da opišite bug sa kojim ste se susreli!"></textarea> 
+											<br>
+											<button id="submit2" type="submit">Submit</button>
+										</div>
+						</div>
+						<div></div>
+					</div>
+
     
       </div>
 
       <!------------------------------------------------------------------------>
-	    <div id="yt_prozor">
-				<h3>Izabrali ste pjesmu:</h3>
-				<iframe width="320" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				<div></div>
-			</div>
+
       
-      <div style="border-bottom: solid 2px #4c8fff;"></div>
-
-
-      <h1 id="acc-natpis">Your account</h1>
-      <div id="karte">
-          <img src="./imgs/user2.jpg" alt="Card image"> 
-          <h4>Ime i prezime</h4>
-          <p>Some example text.</p>
-          <a href="#"><button id="login">Log in</button></a>
-          <a href="#"><button id="reg">Registruj se</button></a>
-	  	</div>
+      
       <!--- TRPAT ELEMENT IZNAD OVOGA DA BI BILO SVE U JEDNOJ LINIJI -->
       <div></div> <!---- KRAJNJI DESNI -->
       
     </div>
  <!------------------------------------------------------------>
  <footer id="kontakt">
-      <p onclick="bug()"> Našli ste bug? Prijavite ga <a>ovdje</a></p>
+      <p v-on:click="bug()"> Našli ste bug? Prijavite ga <a>ovdje</a></p>
       <p>Telefon: </p>
       <p>Email: </p>
       <p>Adresa: (Grad, Poštanski broj)</p>
@@ -108,20 +127,14 @@
 
 		<div id="tabela2">
 			<div>Nove pjesme koje smo dodali na playlistu su:</div>
-		</div>		
+			<img src="./imgs/safet.jpg">
+				</div>		
 			<div></div>
 	</div>
   </div>
 
 
 </div>
-
-
-
-    
-
-
-
 
 </template>
 
@@ -170,40 +183,33 @@ export default {
       else{
         alert("Vec ste pustili 3 pjesme!")
       }
-    }
-  }
-};
-
-function promijeni() {
-
-    var centralni = document.getElementById("centralni");
-    var tijelo = document.getElementById("tijelo");
-    var kontakt = document.getElementById("kontakt");
-    var novosti = document.getElementById("novosti");
+		},
+		toggleBtn() {
+			var centralni = document.getElementById("dodaj-pjesmu");
+			var kontakt = document.getElementById("kontakt");
+			var novosti = document.getElementById("novosti");
 
     if (centralni.style.display === "none") {
-        $("#novosti").fadeOut(300);
-        setTimeout(function(){ centralni.style.display = "grid"; kontakt.style.display = "block"; }, 250);
-        tijelo.style.overflow = "visible";
-        novosti.style.display = "none";
+				$("#novosti").fadeOut(300);
+				setTimeout(function(){ centralni.style.display = "grid"; kontakt.style.display = "block"; }, 250);
+        
     } 
     else {
         centralni.style.display = "none";
         $("#novosti").fadeIn(300);
-        tijelo.style.overflow = "hidden";
-        kontakt.style.display ="none";
-        novosti.style.display = "grid";
-    }
-}
-
-function bug(){
-	$("#pop-up-ask").fadeIn(500);
-	document.getElementById("pop-up-ask").style.display = "grid";
-}
-
-function zatvoribug(){
-	$("#pop-up-ask").fadeOut(300);
-}
+				kontakt.style.display ="none";
+				novosti.style.display = "grid";        
+   	 	}
+		},
+		bug(){
+			$("#pop-up-ask").fadeIn(500);
+		document.getElementById("pop-up-ask").style.display = "grid";
+		},
+		zatvoribug(){
+			$("#pop-up-ask").fadeOut(300);
+		}
+  }
+};
 
 </script>
 
@@ -215,8 +221,6 @@ function zatvoribug(){
    margin: 0px;
 
 }
-
-
 
 /*@media only screen and (max-width: 600px){*/
 	body{
@@ -369,6 +373,7 @@ function zatvoribug(){
 				width: 50%;
 				margin: 5px;
 				cursor: pointer;
+				border: none;
 			}
 
 			#karte a button{
