@@ -1,0 +1,239 @@
+/*@media only screen and (max-width: 600px){*/
+	body{
+		margin: 0;
+		width: 100%;
+		font-family: 'Roboto', sans-serif;
+		overflow-x: hidden;
+		}
+
+		#pop-up-ask{
+			display: none;
+			grid-template-columns: 1fr 8fr 1fr;
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			background-color: rgba(0, 0, 0, 0.7);
+			z-index: 2000;
+			top: 0;
+			justify-content: center;
+		}
+
+		#submit2{
+			margin: 0;
+			background-color: #4c8fff; 
+			border: none;
+			color: white;
+			text-align: center;
+			text-decoration: none;
+			display: grid;
+			border-radius: 2px;
+			height:22px;  
+			width: 70%;
+			margin: auto;
+		}
+
+		#pop-up-ask img{
+			position: absolute;
+			width: 25px;
+			margin: 5%;
+		}
+
+		#bg-modal{
+			margin: auto;
+		}
+		footer p a {
+			color: #330000;
+			font-weight: bold;
+		}
+
+		footer p a:hover{
+			cursor: pointer;
+		}
+
+		nav{
+			width: 100%;
+			background: #4c8fff;
+			height: 50px;
+		}
+
+		nav img{
+			padding-right: 25px;
+			float: right;
+			width: 40px;
+			height: 50px;
+		}
+
+		footer{
+			color: white;
+			padding: 10px;
+			text-align: center;
+			line-height: 0.8em;
+			width: 100%;
+			height: 200px;
+			background-color: #4c8fff;
+		}
+
+		footer img{
+			margin: 0px 5px 10px 5px;
+			width: 30px;
+		}
+
+		#wrapper{
+			background: rgba(76, 143, 255, 0.15);;
+			box-sizing: border-box;
+			display: block;
+			background-image: url("imgs/logo.png");
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+			background-position: center; 
+			}
+
+			#dodaj-pjesmu{
+				display: grid;
+				grid-template-columns: 1fr  8fr 1fr;
+
+			}
+			#centralni{
+				display: grid;
+				grid-row-gap: 1em;
+				float: none;
+			}
+
+			#dodaj-pjesmu > div:nth-child(2) {
+				width: 100%;
+				padding: 10px 0;
+				text-align: center;
+  				color: white;
+			}
+
+			#centralni button{
+				margin: 0;
+			 	background-color: #4c8fff; 
+			    border: none;
+			    color: #383838;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    height:22px; 
+
+			}
+
+			#search-box{
+				margin: 0;
+			}
+
+			#centralni button:active{
+				background-color: #9bc0ff;
+				transition: 0.1s ease-in;
+			}
+
+			#karte img{
+				width: 200px;
+				height: 200px;
+				border-radius: 2px;
+				box-shadow: 2px 2px 2px 2px #444444;
+
+			}
+
+
+			#karte{
+				color: black;
+				padding-bottom: 20px;
+			}
+
+			#karte button{
+				background: #4c8fff;
+				border-radius: 2px;
+				width: 50%;
+				margin: 5px;
+				cursor: pointer;
+			}
+
+			#karte a button{
+				text-decoration: none;
+				color: white;
+				font-weight: bold;
+			}
+
+			#karte button:active{
+				background-color: #9bc0ff;
+				transition: 0.1s ease-in;
+			}
+			#karte button:active a{
+				color:  #330000;
+			}
+
+			#acc-natpis{
+				color: #330000;
+			}
+
+			table {
+			    font-family: arial, sans-serif;
+			    border-collapse: collapse;
+			    width: 100%;
+			    color: #330000;
+				border-radius: 25px;
+			}
+
+			td, th {
+			    border: 1px solid #dddddd;
+			    text-align: left;
+			    padding: 5px 8px;
+			}
+
+
+
+			tr{
+			    background-color: rgba(76, 143, 255, 0.3);
+			
+			}
+
+			tr:nth-child(1) {
+			    background-color: #4c8fff;
+			}
+
+			tr:hover{
+				background: red;
+			}
+			
+			#tabela{
+				margin: auto;
+			}
+
+			#kemal_sam{
+				grid-template-columns: auto  400px auto;
+				color: #330000;
+
+			}
+
+			#kemal_sam > div:nth-child(2) {
+				width: 100%;
+				padding: 50px 0;
+				text-align: center;
+  				background: red; 
+			}
+
+			#novosti{
+				padding-top: 100px;
+				grid-template-rows: 0;
+				grid-template-columns: 1fr 8fr 1fr;
+				width: 100%;
+				height: 800px;
+				background: rgba(76, 143, 255, 0.2);
+				display: none;
+			}
+
+			#menuicon:hover{
+			cursor: pointer;
+		}
+
+			
+
+@media only screen and (max-width: 350px){
+	iframe {
+		width: 300px;
+		height: 300px;
+	}
+}
+
+
