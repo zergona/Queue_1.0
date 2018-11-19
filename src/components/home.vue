@@ -173,9 +173,7 @@ export default {
     }
   }
 };
-</script>
 
-<script type="text/javascript">
 function promijeni() {
 
     var centralni = document.getElementById("centralni");
@@ -206,7 +204,9 @@ function bug(){
 function zatvoribug(){
 	$("#pop-up-ask").fadeOut(300);
 }
+
 </script>
+
 
 <style>
 #app {
