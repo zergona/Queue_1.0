@@ -1,6 +1,3 @@
-
-
-
 <template>
 <!---
   <div id="app"> 
@@ -19,83 +16,116 @@
       <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
     </form>
     <h1 id="hm">Ho'š muzičku?</h1>
---------------> 
-
+-------------->    
    
-<div id="wrapper">
-	<nav>
-		<img id="menuicon" onclick="change()" src="./imgs/menuicon.png">		
-	</nav>
+<div id="tijelo">
 
-	<div id="dodaj-pjesmu">
-		<div></div>
+  <div id="wrapper">
 
-		<div id="centralni">
+    <nav>
+		  <img id="menuicon" onclick="promijeni()" src="./imgs/menuicon.png">		
+	  </nav>
 
-			<div>
-				<input id="search-box" type="text" placeholder="Search.." name="search">
-      			<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
-			</div>
-			
-			<div id="tabela">     
-         <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                  Ime
-                </th>
-                <th>
-                  Izvođač
-                </th>
-                <th> 
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(pjesme, idx) in Songs" :key="idx">
-            <td>
-              {{pjesme.ime}}
-            </td>
-            <td>
-              {{pjesme.izvodjac}}
-            </td>
-            <td>
-              <input type="submit" class="btn btn-primary" value="Dodaj Muzicku" v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)"><br> 
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-</div>
+    <div id="dodaj-pjesmu">
 
+      <div></div>  <!---- KRAJNJI LIJEVI -->
 
-			<div id="kemal_sam">
+      <div id="centralni"> <!--- BOG NAM JE DAO SLOVA PA KAO ŠTO SE ZOVE TU JE I POZICIONIRAN -->
+        <!------------------------------------------------------------>
+        <div>
+				  <input id="search-box" type="text" placeholder="Search.." name="search">
+      		<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
+			  </div>
+			<!---------------------------------------->
+      <div id="tabela">     
+              <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>
+                        Ime
+                      </th>
+                      <th>
+                        Izvođač
+                      </th>
+                      <th> 
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(pjesme, idx) in Songs" :key="idx">
+                  <td>
+                    {{pjesme.ime}}
+                  </td>
+                  <td>
+                    {{pjesme.izvodjac}}
+                  </td>
+                  <td>
+                    <input type="submit" class="btn btn-primary" value="Dodaj Muzicku" v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)"><br> 
+                  </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+    
+      </div>
+
+      <!------------------------------------------------------------------------>
+	    <div id="yt_prozor">
 				<h3>Izabrali ste pjesmu:</h3>
 				<iframe width="320" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				<div></div>
 			</div>
-		<div style="border-bottom: solid 2px #4c8fff;"></div> <!-- De živ bio ovo promijeni -->
-		<h1 id="acc-natpis">Your account</h1>
-		<div id="karte">
-		    <img src="imgs/user2.jpg" alt="Card image"> 
-		    <h4>Ime i prezime</h4>
-		    <p>Some example text.</p>
-		    <a href="#"><button id="kemal_sam2">Log in</button></a>
-		    <a href="#"><button id="kemal_sam3">Registruj se</button></a>
-		</div>
-		</div>
-		
+      
+      <div style="border-bottom: solid 2px #4c8fff;"></div>
+
+
+      <h1 id="acc-natpis">Your account</h1>
+      <div id="karte">
+          <img src="./imgs/user2.jpg" alt="Card image"> 
+          <h4>Ime i prezime</h4>
+          <p>Some example text.</p>
+          <a href="#"><button id="login">Log in</button></a>
+          <a href="#"><button id="reg">Registruj se</button></a>
+	  	</div>
+      <!--- TRPAT ELEMENT IZNAD OVOGA DA BI BILO SVE U JEDNOJ LINIJI -->
+      <div></div> <!---- KRAJNJI DESNI -->
+      
+    </div>
+ <!------------------------------------------------------------>
+ <footer id="kontakt">
+      <p onclick="bug()"> Našli ste bug? Prijavite ga <a>ovdje</a></p>
+      <p>Telefon: </p>
+      <p>Email: </p>
+      <p>Adresa: (Grad, Poštanski broj)</p>
+      <a href="https://facebook.com/" target="_blank"><img src="./imgs/fblogoblack.png"></a>
+      <a href="https://instagram.com/" target="_blank"><img src="./imgs/iglogoblack.png"></a>
+      <a href="https://twitter.com/" target="_blank"><img src="./imgs/twitterlogoblack.png"></a>
+      <a href="https://linkedin.com/" target="_blank"><img src="./imgs/linkedinlogoblack.png"></a>
+    </footer>
+  	<div id="novosti">
+		<div></div>
+
+		<div id="tabela2">
+			<div>Nove pjesme koje smo dodali na playlistu su:</div>
+		</div>		
+			<div></div>
+	</div>
+  </div>
+
+
 </div>
+
 
 
     
 
 
 
+
 </template>
 
 <script>
-
 import firebase from "firebase";
 import { db } from "../main";
 import VueFire from "vuefire";
@@ -143,8 +173,10 @@ export default {
     }
   }
 };
+</script>
 
-function change() {
+<script type="text/javascript">
+function promijeni() {
 
     var centralni = document.getElementById("centralni");
     var tijelo = document.getElementById("tijelo");
@@ -174,13 +206,18 @@ function bug(){
 function zatvoribug(){
 	$("#pop-up-ask").fadeOut(300);
 }
-/*
-document.getElementById("kemal_sam2").setAttribute("disabled", true);
-document.getElementById("kemal_sam3").setAttribute("disabled", true);*/
 </script>
 
-
 <style>
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+   margin: 0px;
+
+}
+
+
+
 /*@media only screen and (max-width: 600px){*/
 	body{
 		margin: 0;
@@ -242,8 +279,10 @@ document.getElementById("kemal_sam3").setAttribute("disabled", true);*/
 		nav img{
 			padding-right: 25px;
 			float: right;
-			width: 40px;
-			height: 50px;
+      width: 50px;
+      height: 40px;
+
+			
 		}
 
 		footer{
@@ -315,7 +354,7 @@ document.getElementById("kemal_sam3").setAttribute("disabled", true);*/
 				height: 200px;
 				border-radius: 2px;
 				box-shadow: 2px 2px 2px 2px #444444;
-
+        margin-bottom: 20px;
 			}
 
 
@@ -379,17 +418,17 @@ document.getElementById("kemal_sam3").setAttribute("disabled", true);*/
 				background: red;
 			}
 			
-			#tabela{
+			#tabela2, #tabela{
 				margin: auto;
 			}
 
-			#kemal_sam{
+			#yt_prozor{
 				grid-template-columns: auto  400px auto;
 				color: #330000;
-
+        margin-bottom: 20px;
 			}
 
-			#kemal_sam > div:nth-child(2) {
+			#yt_prozor > div:nth-child(2) {
 				width: 100%;
 				padding: 50px 0;
 				text-align: center;
@@ -421,24 +460,5 @@ document.getElementById("kemal_sam3").setAttribute("disabled", true);*/
 
 
 
-
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 0px;
-  background-image: url("https://i.imgur.com/628rp5Q.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-#header {
-  background-color: #a1c3d1;
-}
-#hm {
-  padding-bottom: 2%;
-}
 </style>
 
