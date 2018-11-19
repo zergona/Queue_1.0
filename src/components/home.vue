@@ -37,7 +37,8 @@
       		<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
 			  </div>
 			<!---------------------------------------->
-      <div id="tabela">     
+      <!--
+			<div id="tabela">     
               <table class="table table-striped">
               <thead>
                   <tr>
@@ -66,7 +67,7 @@
                   </tbody>
                 </table>
               </div>
-
+							-->
 					<div id="yt_prozor">
 						<h3>Izabrali ste pjesmu:</h3>
 						<iframe width="320" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -87,9 +88,11 @@
             </div>
 
 
-											<div id="pop-up-ask">
+				<div id="pop-up-ask">
 						<div></div>
+
 						<img v-on:click="zatvoribug()" class ="close-icon" src="./imgs/closeicon.png" alt="close-icon">
+
 							<div id="bg-modal" >
 										<div>
 											<textarea rows="10" cols="30" id="contact-form-msg" name="Msg" placeholder="Molimo Vas da opišite bug sa kojim ste se susreli!"></textarea> 
@@ -130,10 +133,8 @@
 			<img src="./imgs/safet.jpg">
 				</div>		
 			<div></div>
-	</div>
+		</div>
   </div>
-
-
 </div>
 
 </template>
@@ -223,9 +224,10 @@ export default {
 }
 
 /*@media only screen and (max-width: 600px){*/
-	body{
+	#tijelo{
 		margin: 0;
-		width: 100%;
+		display: grid;
+		max-width: 100%;
 		font-family: 'Roboto', sans-serif;
 		overflow-x: hidden;
 		}
@@ -286,7 +288,6 @@ export default {
       width: 50px;
       height: 40px;
 
-			
 		}
 
 		footer{
@@ -335,13 +336,12 @@ export default {
 			#centralni button{
 				margin: 0;
 			 	background-color: #4c8fff; 
-			    border: none;
-			    color: #383838;
-			    text-align: center;
-			    text-decoration: none;
-			    display: inline-block;
-			    height:22px; 
-
+			  border: none;
+			  color: #383838;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  height:22px; 
 			}
 
 			#search-box{
@@ -354,8 +354,8 @@ export default {
 			}
 
 			#karte img{
-				width: 200px;
-				height: 200px;
+				max-width: 200px;
+				max-height: 200px;
 				border-radius: 2px;
 				box-shadow: 2px 2px 2px 2px #444444;
         margin-bottom: 20px;
@@ -428,7 +428,7 @@ export default {
 			}
 
 			#yt_prozor{
-				grid-template-columns: auto  400px auto;
+				grid-template-columns: auto  300px auto;
 				color: #330000;
         margin-bottom: 20px;
 			}
@@ -457,13 +457,13 @@ export default {
 			
 
 @media only screen and (max-width: 350px){
+	#tijelo{
+		width: 320px;
+	}
 	iframe {
 		width: 300px;
 		height: 300px;
 	}
 }
-
-
-
 </style>
 
