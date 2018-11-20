@@ -3,15 +3,15 @@
     
     <div class="login">
       
-        <form id="wrapper" v-on:submit.prevent="login">
+        <form id="wrapper2" v-on:submit.prevent="login">
        <div></div>
 <!-------------------------------------->
-	<div id="tijelo">
+	<div id="tijelo2">
 	
 		<div id="icon-user">
 			<div></div>
 			<div>
-				<img src="./imgs/user.png" class="user-logo">
+				<img src="./imgs/userglavno.png" class="user-logo">
 			</div>
 			<div></div>
 		</div>
@@ -115,18 +115,18 @@ export default {
 
 <style>
 
-#wrapper{
+#wrapper2{
 	margin: 10% auto;
 	display: grid;
 	grid-template-columns: 1fr 8fr 1fr;
 	
 }
 
-#tijelo{
+#tijelo2{
 	box-sizing: border-box;
 }
 
-#tijelo img, input{
+#tijelo2 img, #tijelo2 input{
 	display: block;
 	margin: auto;
 	padding-bottom: 15px;
@@ -153,7 +153,7 @@ export default {
 	grid-template-rows: 1fr 5fr 1fr;
 }
 
-#tijelo{
+#tijelo2{
 	width: 100%;
 	background:rgba(66, 134, 244, 0.5);
 	}
