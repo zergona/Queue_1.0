@@ -1,5 +1,69 @@
 <template>
     
+    
+    <div class="login">
+      
+        <form id="wrapper" v-on:submit.prevent="login">
+       <div></div>
+<!-------------------------------------->
+	<div id="tijelo">
+	
+		<div id="icon-user">
+			<div></div>
+			<div>
+				<img src="./imgs/user.png" class="user-logo">
+			</div>
+			<div></div>
+		</div>
+
+		<div id="icon-email">
+			<div></div>
+			<div>
+				<img src="./imgs/email.png">
+			</div>
+			<div></div>
+		</div>
+		
+		<div id="email">
+			<input type="text" v-model="email" placeholder="Email">
+		</div>
+		
+		<div id="icon-key">
+			<div></div>
+			<div>
+				<img src="./imgs/pw.png">
+			</div>
+			<div></div>
+		</div>
+		
+		<div id="pw">
+			<input type="password" v-model="password" placeholder="Password" id="pw-input">
+		</div>
+		
+		<div id="show-pw">
+			<div id="wrap"><input type="checkbox" v-on:click="showPassword()"><p>Show password</p></div>
+		</div>
+		
+		<div id="btn">
+			<div></div>
+			<div>
+				<button type="submit">Log in</button>
+			</div>
+			<div></div>
+		</div>
+		
+		<div id="ostalo">
+			<a href="#">Forgot password?</a>
+      <p><router-link to="/sign-up">Create account</router-link></p>
+		</div>
+	
+	</div>
+<!-------------------------------------->
+	<div></div>
+
+        </form>
+        
+    </div>
 
 
 </template>
