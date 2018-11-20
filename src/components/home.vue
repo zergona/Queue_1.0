@@ -16,7 +16,7 @@
       <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
     </form>
     <h1 id="hm">Ho'š muzičku?</h1>
--------------->    
+ -->    
    
 <div id="tijelo">
 
@@ -28,15 +28,15 @@
 
     <div id="dodaj-pjesmu">
 
-      <div></div>  <!---- KRAJNJI LIJEVI -->
+      <div></div>  <!-- KRAJNJI LIJEVI -->
 
       <div id="centralni"> <!--- BOG NAM JE DAO SLOVA PA KAO ŠTO SE ZOVE TU JE I POZICIONIRAN -->
-        <!------------------------------------------------------------>
+        <!-- -->
         <div>
 				  <input id="search-box" type="text" placeholder="Search.." name="search">
       		<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
 			  </div>
-			<!---------------------------------------->
+			<!-- -->
      
 		 
 		  <div id="tabela">     
@@ -67,13 +67,30 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-			
-							<div id="yt_prozor">
-						<h3>Izabrali ste pjesmu:</h3>
-						<iframe width="350" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-
+								<h3>Pjesme na redu:</h3>
+						<table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>
+                        Ime
+                      </th>
+                      <th>
+                        Izvođač
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(pjesme, idx) in Songs2" :key="idx">
+                  <td>
+                    {{pjesme.ime}}
+                  </td>
+                  <td>
+                    {{pjesme.izvodjac}}
+                  </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>		
 					<div style="border-bottom: solid 2px #4c8fff;"></div>
 
 					<h1 id="acc-natpis">Your account</h1>
@@ -107,7 +124,7 @@
     
       </div>
 
-      <!------------------------------------------------------------------------>
+      <!-- -->
 
       
       
@@ -115,7 +132,7 @@
       <div></div> <!---- KRAJNJI DESNI -->
       
     </div>
- <!------------------------------------------------------------>
+ <!-- -->
  <footer id="kontakt">
       <p v-on:click="bug()"> Našli ste bug? Prijavite ga <a>ovdje</a></p>
       <p>Telefon: </p>
@@ -131,12 +148,12 @@
 
 		<div id="tabela2">
 			<div>Nove pjesme koje smo dodali na playlistu su:</div>
-			<img src="./imgs/safet.jpg">
+			
 				</div>		
 			<div></div>
 		</div>
   </div>
-</div>
+
 
 </template>
 
@@ -154,12 +171,14 @@ export default {
       pjesma: "",
       ime: "",
       izvodjac: "",
-      indx2: 0
+      indx2: 0,
+			Songs2: [],
     };
   },
   firestore() {
     return {
-      Songs: db.collection("Songs2").orderBy("createdAt")
+      Songs: db.collection("Songs2").orderBy("createdAt"),
+			Songs2: db.collection("Songs").orderBy("createdAt")
     };
   },
   methods: {
@@ -421,11 +440,12 @@ export default {
 			}
 
 			tr:hover{
-				background: red;
+				background: #E0CDC5;
 			}
 			
 			#tabela2, #tabela{
 				margin: auto;
+				color: black;
 			}
 
 			#yt_prozor{
