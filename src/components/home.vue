@@ -37,8 +37,7 @@
       		<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
 			  </div>
 			<!---------------------------------------->
-      <!--
-			<div id="tabela">     
+      <div id="tabela">     
               <table class="table table-striped">
               <thead>
                   <tr>
@@ -67,8 +66,8 @@
                   </tbody>
                 </table>
               </div>
-							-->
-					<div id="yt_prozor">
+			
+							<div id="yt_prozor">
 						<h3>Izabrali ste pjesmu:</h3>
 						<iframe width="320" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
