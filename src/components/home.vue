@@ -37,7 +37,9 @@
       		<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
 			  </div>
 			<!---------------------------------------->
-      <div id="tabela">     
+     
+		 
+		  <div id="tabela">     
               <table class="table table-striped">
               <thead>
                   <tr>
@@ -60,7 +62,7 @@
                     {{pjesme.izvodjac}}
                   </td>
                   <td>
-                    <input type="submit" class="btn btn-primary" value="Dodaj Muzicku" v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)"><br> 
+                    <input type="submit" class="btn btn-primary" value="Dodaj" v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)"><br> 
                   </td>
                     </tr>
                   </tbody>
@@ -69,7 +71,7 @@
 			
 							<div id="yt_prozor">
 						<h3>Izabrali ste pjesmu:</h3>
-						<iframe width="320" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<iframe width="350" height="315" src="https://www.youtube.com/embed/t5GhBdU_Q74" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 
 					<div style="border-bottom: solid 2px #4c8fff;"></div>
@@ -457,10 +459,10 @@ export default {
 
 @media only screen and (max-width: 350px){
 	#tijelo{
-		width: 320px;
+		max-width: 320px;
 	}
 	iframe {
-		width: 300px;
+		width: 280px;
 		height: 300px;
 	}
 }
