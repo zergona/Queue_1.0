@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '../components/home'
-import Login from '../components/Login'
+/* import Login from '../components/Login'*/
 import SignUp from '../components/SignUp'
 import Admin from '../components/Admin'
 import firebase from 'firebase'
@@ -35,11 +35,11 @@ let router = new Router({
         requiresAuth: false
       }
     },
-    {
+   /* {
       path: '/login',
       name: 'Login',
       component: Login
-    },
+    }, */
     {
       path: '/sign-up',
       name: 'SignUp',

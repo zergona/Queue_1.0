@@ -43,15 +43,18 @@ export default {
       link: '',
       videoId: 'videoId',
       startTime:'',
-      indx: -1,
+      indx: 0,
       videoEnded: false, 
-      ime: ''
+      ime: '',
+      Songs2: [],
+      indx2: 0
     }
   },
   
   firestore () {
     return {
-      Songs: db.collection('Songs').orderBy('createdAt')
+      Songs: db.collection('Songs').orderBy('createdAt'),
+      Songs2: db.collection("Songs2").orderBy("createdAt")
     }
   },
   methods: {
@@ -68,9 +71,11 @@ export default {
     },
 
     change () {
-      if(this.indx <= this.Songs.length+1) {
+      console.log(this.indx)
+      if(this.indx <= this.Songs.length+1 && this.indx>1) {
         this.indx = this.indx + 1
       }
+      if(this.Songs.length > 0){
         this.ytvid(this.Songs[this.indx].pjesma)
         const createdAt = new Date()
         var pjesma = this.Songs[this.indx].pjesma
@@ -79,7 +84,17 @@ export default {
         var izvodjac = this.Songs[this.indx].izvodjac
         db.collection('Songs2').add({ pjesma, createdAt, ime, izvodjac })
         db.collection('Songs').doc(id).delete()
-        this.indx = this.indx-1
+        
+        }
+      else{
+        this.ytvid(this.Songs2[this.indx2].pjesma)
+        this.indx2 = this.indx2 + 1
+        if(this.indx<0){
+          this.indx = this.indx + 1;
+        }
+      }
+      
+      
     },
     ytvid (url) {
       this.videoId = this.$youtube.getIdFromURL(url)
