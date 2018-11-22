@@ -33,7 +33,7 @@
       <div id="centralni"> <!--- BOG NAM JE DAO SLOVA PA KAO ŠTO SE ZOVE TU JE I POZICIONIRAN -->
         <!-- -->
         <div>
-				  <input id="search-box" type="text" placeholder="XDDDD" name="search">
+				  <input id="search-box" type="text" placeholder="Search (coming soon)" name="search">
       		<button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
 			  </div>
 			<!-- -->
