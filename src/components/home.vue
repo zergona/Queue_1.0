@@ -3,20 +3,28 @@
 <div id = "wrapper-home">
 
 <header>
-	<div id="choose-home">Choose your song:</div>
-	<div id="queue-home">In queue:</div>
+	<div id="choose-home">Pick a song:</div>
+	<input id="search-box" style="height:25px" v-model="search" @input="delay()" placeholder="Search">
+	<div id="queue-home">In Queue:</div>
 </header>
 
 <div id="tijelo-home">
-
-	<div id="varijanta1" v-for="(pjesme, idx) in Songs" :key="idx">
+	<div class="tijelo-pjesme" v-if="pretraga[idx] != ''" v-for="(pjesme, idx) in pretraga" :key="idx" > 
+			<div>
+				<div id="pjesma-ime">{{pjesme.ime}}</div>
+					<div id="pjesma-izv">{{pjesme.izvodjac}}</div>
+				</div>
+			<div id="pjesma-add"><img v-on:click.prevent="addSong3(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)" src="./imgs/add.png"><br></div> 
+	</div>
+	
+	<div class="tijelo-pjesme" v-for="(pjesme, idx) in Songs" :key="idx" >
 		<div>
 			<div id="pjesma-ime">{{pjesme.ime}}</div>
-			<div id="pjesma-izv">{{pjesme.izvodjac}}</div>
-		</div>
-		<div id="add-home"><img v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)" src="./imgs/add.png"></div>
+				<div id="pjesma-izv">{{pjesme.izvodjac}}</div>
+			</div>
+			<div id="pjesma-add"><img v-on:click.prevent="addSong2(pjesme.pjesma, pjesme.id, pjesme.ime, pjesme.izvodjac)" src="./imgs/add.png"><br></div> 
+			</div>
 	</div>
-</div>
 
 <div id="tijelo-home2">
 	<div id="varijanta2" v-for="(pjesme, idx) in Songs2" :key="idx">
@@ -27,13 +35,14 @@
 	</div>
 </div>
 
-<footer>
+<div class="se-pre-con"></div>
+
+<div id="footer-home">
 	<div v-on:click="toggle1()" id="list-home-btn"><img src="./imgs/noteblue.png"><p>Playlist</p></div>
 	<div v-on:click="toggle2()" id="queue-home-btn"><img src="./imgs/playblue.png"><p>Queue</p></div>
-</footer>
+</div>
 
 </div>
- 
 
 </template>
 
@@ -54,16 +63,16 @@ export default {
       ime: "",
       izvodjac: "",
       indx2: 0,
-			Songs2: [],
-			unos: "",
-			pretraga: []
-						
+	  Songs2: [],
+	  unos: "",
+	  pretraga: [],
+	  i: 0					
 		};
   },
   firestore() {
     return {
-     Songs: db.collection("ssstPL").orderBy("createdAt"),
-		 Songs2: db.collection("ssstQ").orderBy("createdAt"),
+    Songs: db.collection("ssstPL").orderBy("createdAt"),
+	Songs2: db.collection("ssstQ").orderBy("createdAt"),
 			
 			asObject: true
     };
@@ -81,27 +90,96 @@ export default {
 		
     addSong(pjesma, ime, izvodjac) {
       const createdAt = new Date();
-      db.collection("ArgCigQ").add({ pjesma, createdAt, ime, izvodjac });
-    },
+      db.collection("ssstQ").add({ pjesma, createdAt, ime, izvodjac });
+	},
+	
+	//KEMICA ---------------------------------------
     addSong2(pjesma, id, ime, izvodjac) {      
-      if(this.indx2<3){
-        const createdAt = new Date();
+	 	this.i++;	
+		var val = window.sessionStorage.getItem('provjera');
+	
+	if (val < 3){
+		 window.sessionStorage.setItem('provjera', this.i);
+	 //if(this.indx2<3){
+	    const createdAt = new Date();
         db.collection("ssstQ").add({ pjesma, createdAt, ime, izvodjac });
-				db.collection("ssstPL").doc(id).delete();
+		db.collection("ssstPL").doc(id).delete();
         this.indx2 = this.indx2 + 1;
 				
-      }
+		
+	  	
+	  }
       else{
         alert("Vec ste pustili 3 pjesme!")
       }
 		},
+
+		 addSong3(pjesma, id, ime, izvodjac) {  
+		this.i++;	
+		var val = window.sessionStorage.getItem('provjera');
+		
+		if (val < 3){
+		 window.sessionStorage.setItem('provjera', this.i);	     
+      if(this.indx2<3){
+        const createdAt = new Date();
+        db.collection("ssstQ").add({ pjesma, createdAt, ime, izvodjac });
+		db.collection("ssstPL").doc(id).delete();
+		this.indx2 = this.indx2 + 1;
+
+		for(var i = 0; i < this.pretraga.length; i++){
+			if (this.pretraga[i].izvodjac == izvodjac && this.pretraga[i].ime == ime){
+           		this.pretraga[i] = "";									
+					}
+				}
+			}
+		}
+		else{
+        alert("Vec ste pustili 3 pjesme!")
+      }
+		},
+//KEMICA -----------------------------------------------------------
+	delay(){
+		window.setTimeout(this.search1, 150);
+	},
+
+	search1(){
+
+			var input = document.getElementById("search-box").value;
+			this.unos = input.toLowerCase().trim();
+							
+			if(this.unos != ""){
+
+			for (var i = 0; i < this.Songs.length; i++){
+	
+				if (this.Songs[i].izvodjac.toLowerCase().trim().includes(this.unos) == true || this.Songs[i].ime.toLowerCase().trim().includes(this.unos) == true){
+					
+					this.pretraga.push(this.Songs[i]);
+									
+					}			
+				}
+		}
+		else {
+				this.pretraga = [];
+			}
+
+				if (this.unos != ""){
+					$(".tijelo-pjesme").children().css("display", "none");
+						
+				}
+
+				else{
+						$(".tijelo-pjesme").children().css("display", "block");
+				}					
+				
+	},
 		
 		toggle2(){
 			document.getElementById("choose-home").style.display = "none";
 			document.getElementById("queue-home").style.display = "block";
 			document.getElementById("tijelo-home").style.display = "none";
 			document.getElementById("tijelo-home2").style.display = "block";
-		
+			document.getElementById("search-box").style.display = "none";
+									
 		},
 
 		toggle1(){
@@ -109,8 +187,8 @@ export default {
 			document.getElementById("choose-home").style.display = "block";
 			document.getElementById("tijelo-home2").style.display = "none";
 			document.getElementById("tijelo-home").style.display = "block";
-
-			
+			document.getElementById("search-box").style.display = "block";
+			document.getElementById("search-box").style.margin = "auto";
 		},
 
 		bug(){
@@ -141,25 +219,42 @@ export default {
 	margin-bottom: 60px;
 }
 
-footer{
-	 grid-template-columns: 1fr 1fr;
-	 display: grid;
-	 position: fixed;
+#footer-home{
+   grid-template-columns: 1fr 1fr;
+   display: grid;
+   position: fixed;
    left: 0;
    bottom: 0;
    width: 100%;
+   padding-top: 5px;
    background-color: #222;
-	 height: 60px;
+   height: 60px;
    color: white;
    text-align: center;
+   border-top: rgb(0, 180, 219) 3px solid;
+   
 }
 
-footer div{
+.tijelo-pjesme{
+	display: grid;
+	grid-template-columns: 5fr 1fr;
+	text-align: left;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: 1.5s;
+}
+
+.tijelo-pjesme div{
+	margin: 3px 10px;
+}
+
+#footer-home div{
 	display: block;
 	margin: auto;
 }
 
-footer img{
+#footer-home img{
 	max-width: 25px;
 }
 
@@ -176,7 +271,7 @@ header{
 	background: black;
 }
 
-#varijanta1, #varijanta2{
+ #varijanta2{
 	display: grid;
 	grid-template-columns: 90% 10%;
 	text-align: left;
@@ -198,12 +293,20 @@ header{
 	font-size: 12px;
 }
 
-#tijelo-home,#tijelo-home2{
+#tijelo-home{
 	max-height: 100%;
 	overflow-y: auto;
-	margin-top: 65px;
+	margin-top: 100px;
 }
-#varijanta1 img{
+
+
+#tijelo-home2{
+	max-height: 100%;
+	overflow-y: auto;
+	margin-top: 60px;
+}
+
+.tijelo-pjesme img{
 	width: 25px;
 }
 

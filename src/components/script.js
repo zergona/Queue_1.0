@@ -32,7 +32,11 @@ function zatvoribug(){
 document.getElementById("kemal_sam2").setAttribute("disabled", true);
 document.getElementById("kemal_sam3").setAttribute("disabled", true);
 
-
+	function učitavanje(){
+		$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	});
 	/*
 	popUp.style.display = "grid"; 
 	popUp.style.width = "100%";

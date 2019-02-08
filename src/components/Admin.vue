@@ -16,7 +16,12 @@
       <div id="pokreni-muziku-btn">
             <div></div>
             <form v-on:submit.prevent="change()">      
-              <input id="pokreni-muziku" type="submit" class="btn btn-primary" value="Pokreni muziku"><br> 
+              <input id="pokreni-muziku" type="submit" class="btn btn-primary" value="Play music"><br> 
+            </form>
+            <div></div>
+            <div></div>
+            <form v-on:submit.prevent="brisisve">      
+              <input id="brisi-sve" type="submit" class="btn btn-primary" value="Clear queue"><br> 
             </form>
             <div></div>
       </div>
@@ -24,24 +29,24 @@
       <div id="main-admin">
             <div></div>
             <div>
-              <h1>Pjesma na redu:</h1>
-              <youtube id="xd" player-width="70%" @ended="change(), del" :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
+              <youtube id="xd" player-width="70%" @error="brisi()" @ended="change(), del"  :player-vars="{ autoplay: 1 }" :video-id="videoId"></youtube>        
             </div>
             <div></div>
       </div>
       <form v-on:submit.prevent="addSong(pjesma, ime, izvodjac)">      
-      <input type="text" v-model="pjesma" placeholder="Pjesma">
-      <input type="text" v-model="ime" placeholder="Ime">
-      <input type="text" v-model="izvodjac" placeholder="Izvodjac">
-      <input type="submit" class="btn btn-primary" value="Dodaj Muzicku"><br> 
+      <input type="text" v-model="pjesma" placeholder="Song link" required>
+      <input type="text" v-model="ime" placeholder="Song name" required>
+      <input type="text" v-model="izvodjac" placeholder="Artist" required>
+      <input type="submit" class="btn btn-primary" value="Add song" required><br> 
       </form>
 
       <div id="tijelo-home">
-
-	<div id="varijanta1" v-for="(pjesme, idx) in Songs" :key="idx">
+  <h1>Currently in Queue: </h1>
+	<div id="varijantakurac" v-for="(pjesme, idx) in Songs" :key="idx">
       <div>
         <div id="pjesma-ime">{{pjesme.ime}}</div>
         <div id="pjesma-izv">{{pjesme.izvodjac}}</div>
+        <div><input type="submit" class="btn btn-primary" v-on:click.prevent="removesong(pjesme.id)" value="Remove"></div>
       </div>
     </div>
   </div>
@@ -134,6 +139,41 @@ export default {
       
       
     },
+    brisi () {
+      console.log(this.indx)
+      if(this.indx <= this.Songs.length+1 && this.indx>1) {
+        this.indx = this.indx + 1
+      }
+      if(this.Songs.length > 0){
+        this.ytvid(this.Songs[this.indx].pjesma)
+        const createdAt = new Date()
+        var pjesma = this.Songs[this.indx].pjesma
+        var ime = this.Songs[this.indx].ime
+        var id = this.Songs[this.indx].id
+        var izvodjac = this.Songs[this.indx].izvodjac
+        db.collection('ssstQ').doc(this.Songs[this.indx-1].id).delete()
+        
+        }
+      else{
+        this.ytvid(this.Songs2[this.indx2].pjesma)
+        this.indx2 = this.indx2 + 1
+        if(this.indx<0){
+          this.indx = this.indx + 1;
+        }
+      }
+    },
+    brisisve(){
+        for(var i = 0; i<this.Songs.length; i++){
+          const createdAt = new Date()
+          var pjesma = this.Songs[i].pjesma
+          var ime = this.Songs[i].ime
+          var id = this.Songs[i].id
+          var izvodjac = this.Songs[i].izvodjac
+          db.collection('ssstPL').add({ pjesma, createdAt, ime, izvodjac })
+          db.collection('ssstQ').doc(this.Songs[i].id).delete()
+        }
+      },
+
     ytvid (url) {
       this.videoId = this.$youtube.getIdFromURL(url)
       this.startTime = this.$youtube.getTimeFromURL(url)
@@ -144,6 +184,9 @@ export default {
       const createdAt = new Date();
       db.collection("ssstPL").add({ pjesma, createdAt, ime, izvodjac });
     },
+    removesong(id){
+      db.collection('ssstQ').doc(id).delete()
+    }
   }
 }
 </script>
@@ -161,13 +204,12 @@ export default {
  }
 
 
-#varijanta1{
+#varijantakurac{
 	display: grid;
 	grid-template-columns: 90% 10%;
-	text-align: left;
+	text-align: center;
 	padding: 10px 0;
-	padding-left: 20px;
-	padding-right: 10px;
+	padding-left: 150px;
 }
 
 #pjesma-ime{
