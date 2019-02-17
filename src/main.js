@@ -20,6 +20,8 @@ firebase.initializeApp({
 let app
 
 export const db = firebase.firestore()
+const settings = {timestampsInSnapshots: true}
+db.settings(settings)
 export const YOUTUBE_API_KEY = 'AIzaSyCk6MdBIeUejC-ae89DkMrC7kZHWkFBzPM'
 
 Vue.config.productionTip = false

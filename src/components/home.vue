@@ -4,7 +4,7 @@
 
 <header>
 	<div id="choose-home">Pick a song:</div>
-	<input id="search-box" style="height:25px" v-model="search" @input="delay()" placeholder="Search">
+	<input id="search-box" style="height:25px"  @input="delay()" placeholder="Search">
 	<div id="queue-home">In Queue:</div>
 </header>
 
